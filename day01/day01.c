@@ -5,7 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 
-const char nums[4][6] = {"zero", "one", "two", "three"};
+const char nums[10][6] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 const int lenNums = sizeof(nums) / sizeof(nums[0]);
 
 int getDigit(char *line, int i) {
@@ -15,7 +15,7 @@ int getDigit(char *line, int i) {
         return line[i] - '0';
     }
     char *subline = line + i;
-    printf("substring: %s\n", subline);
+    // printf("substring: %s\n", subline);
     for (size_t j = 0; j < lenNums; j++) {
         pch = strstr(subline, nums[j]);
         //printf("strlen of %s: %zu\n", nums[j], strlen(nums[j]));
@@ -23,12 +23,13 @@ int getDigit(char *line, int i) {
 
 
         if (pch) {
-            char test[6];
             size_t l = strlen(nums[j]);
+            char test[l+1];
             strncpy(test, subline, l);
-            // test[l + 1] = '\0';
+            test[l + 1] = '\0';
+
             if (strcmp(test, nums[j]) == 0) {
-                printf("test: %s\n", test);
+                // printf("test: %s\n", test);
                 return j;
             }
 
@@ -46,7 +47,7 @@ int main(void) {
 
     char ch;
     int left, right;
-    int total, ele = 0;
+    int total = 0;
 
     fp = fopen("./sample.txt", "r");
     if (fp == NULL)
@@ -68,7 +69,13 @@ int main(void) {
 			}
             
         }
+
+        if (d2 == -1) { d2 = d1; };
         printf("First: %d, Last: %d\n", d1, d2);
+
+
+        total += d1*10 + d2;
+        printf("Running total: %d\n", total);
         // for (int i = 0; i < read; i++) {
         //     ch = line[i];
         //     if (ch >= 48 && ch <=57) {
