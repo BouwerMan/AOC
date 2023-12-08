@@ -6,7 +6,7 @@
 #include <ctype.h>
 
 const char nums[10][6] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-const int lenNums = sizeof(nums) / sizeof(nums[0]);
+const int lenNums = 10; //sizeof(nums) / sizeof(nums[0]);
 
 int getDigit(char *line, int i) {
     char * pch;
@@ -15,8 +15,10 @@ int getDigit(char *line, int i) {
         return line[i] - '0';
     }
     char *subline = line + i;
-    // printf("substring: %s\n", subline);
+    printf("substring: %s\n", subline);
+
     for (size_t j = 0; j < lenNums; j++) {
+        printf("Testing: %s\n", nums[j]);
         pch = strstr(subline, nums[j]);
         //printf("strlen of %s: %zu\n", nums[j], strlen(nums[j]));
         //if (pch) {printf("strlen pch: %zu\n", strlen(pch));}
@@ -24,12 +26,14 @@ int getDigit(char *line, int i) {
 
         if (pch) {
             size_t l = strlen(nums[j]);
-            char test[l+1];
+            char test[6] = {};
             strncpy(test, subline, l);
             test[l + 1] = '\0';
-
+            printf("%d\n", strcmp(test, nums[j]));
+            printf("Sizeof %d\n", l);
+            printf("test=%s\n", test);
             if (strcmp(test, nums[j]) == 0) {
-                // printf("test: %s\n", test);
+                printf("test: %s\n", test);
                 return j;
             }
 
