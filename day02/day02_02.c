@@ -1,4 +1,5 @@
 //https://adventofcode.com/2023/day/2
+// Part 2
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -110,7 +111,7 @@ int main(void) {
     game g;
     game empty;
     char ch;
-    int total = 0;
+    int powers, total = 0;
 
     fp = fopen("./sample.txt", "r");
     if (fp == NULL)
@@ -132,9 +133,11 @@ int main(void) {
         g.blue = getMaxCubes(line, "blue", g.rounds);
         printf("Max blue cubes found: %d\n", g.blue);
         printf("\n");
-        if ((g.red <= maxReds) && (g.green <= maxGreens) && (g.blue <= maxBlues)) {
-            total += g.id;
-        }
+
+        powers = g.red * g.blue * g.green;
+        printf("powers: %d\n", powers);
+        total += powers;
+        
         g = empty;
     }
 
