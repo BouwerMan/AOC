@@ -9,13 +9,32 @@
 #define FILE_LENGTH 10
 
 using namespace std;
+
+int find_num(vector<string>& vect, size_t line_num, size_t char_num)
+{
+    // Looking up
+    if (line_num != 0) {
+        for (size_t i = -1; i <= 1; i++) {
+            char d = vect[line_num - 1][i];
+            if (!isalpha(d)) {
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
 void solve(vector<string>& vect)
 {
-    for (string line : vect) {
-        for (char& c : line) {
-            if (ispunct(c) && c != '.') {
-                cout << "Found char: " << c << endl;
+    for (size_t i = 0; i < vect.size(); i++) {
+        string line = vect[i];
+        for (size_t j = 0; j < line.length(); j++) {
+            char c = line[j];
+            if (!ispunct(c) || c == '.') {
+                continue;
             }
+            cout << "Found char: " << c << endl;
+            find_num(vect, i, j);
         }
     }
 }
